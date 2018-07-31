@@ -9,4 +9,11 @@ public class SCR_FloorTileInfo : MonoBehaviour {
 
     public bool walkable;
 
+    public static Color originalColor = Color.white;
+
+    public void ChangeTileColor(Color _newColor)
+    {
+        GetComponent<Renderer>().material.color = _newColor;
+    }
+
 }

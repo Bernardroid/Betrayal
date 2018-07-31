@@ -9,10 +9,15 @@ public class Board : MonoBehaviour {
     public static int width = 10;
     public static int height = 10;
 
-    public enum TileTypes
+    public static void  ResetTilesColor()
     {
-        EMPTY = 0,
-        DIRT = 1,
+        for(int i = 0; i < Tiles.GetLength(0); i++)
+        {
+            for(int j = 0; j < Tiles.GetLength(1); j++)
+            {
+                Tiles[i, j].GetComponent<SCR_FloorTileInfo>().ChangeTileColor(SCR_FloorTileInfo.originalColor);
+            }
+        }
     }
 
 }

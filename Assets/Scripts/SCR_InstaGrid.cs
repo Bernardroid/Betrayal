@@ -12,6 +12,11 @@ public class SCR_InstaGrid : MonoBehaviour {
 
     void Start()
     {
+        InitializeBoard();
+    }
+
+    void InitializeBoard()
+    {
         Board.Tiles = new GameObject[Board.width, Board.height];
 
         //Create gameboard linked to array
@@ -22,22 +27,23 @@ public class SCR_InstaGrid : MonoBehaviour {
                 rndX = Random.Range(0, 9);
                 rndY = Random.Range(0, 9);
 
-                Board.Tiles[i, j] = Instantiate(gridSpace, new Vector3(i*10, 0, j*10), Quaternion.identity, dynamicBoard);
+                Board.Tiles[i, j] = Instantiate(gridSpace, new Vector3(i * 10, 0, j * 10), Quaternion.identity, dynamicBoard);
 
                 //Assign position in array to object
                 Board.Tiles[i, j].GetComponent<SCR_FloorTileInfo>().xPos = i;
                 Board.Tiles[i, j].GetComponent<SCR_FloorTileInfo>().yPos = j;
 
+                Board.Tiles[i, j].GetComponent<SCR_FloorTileInfo>().walkable = true;
 
                 //Random obstacles
-                if (i == rndX || j == rndY)
-                {
-                    Board.Tiles[i, j].GetComponent<SCR_FloorTileInfo>().walkable = false;
-                }
-                else
-                {
-                    Board.Tiles[i, j].GetComponent<SCR_FloorTileInfo>().walkable = true;
-                }
+                //if (i == rndX || j == rndY)
+                //{
+                //    Board.Tiles[i, j].GetComponent<SCR_FloorTileInfo>().walkable = false;
+                //}
+                //else
+                //{
+                //    Board.Tiles[i, j].GetComponent<SCR_FloorTileInfo>().walkable = true;
+                //}
             }
         }
 

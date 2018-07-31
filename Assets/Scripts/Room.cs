@@ -49,21 +49,21 @@ public class Room : MonoBehaviour
     }
 	
 	// Update is called once per frame
-	void Update ()
-    {
-        //if (Input.GetMouseButtonDown(0))
-        //{
-        //    Debug.Log("entro");
-        //    ChangeStrenght(0.5f);
-        //}
-    }
+	//void Update ()
+ //   {
+ //       //if (Input.GetMouseButtonDown(0))
+ //       //{
+ //       //    Debug.Log("entro");
+ //       //    ChangeStrenght(0.5f);
+ //       //}
+ //   }
 
-    public void ChangeStrenght(float _value)
-    {
-        for(int i = 0; i < myMat.Length;i++)
-        {
-            myMat[i].SetFloat("_Strenght", _value);
-        }
+    //public void ChangeStrenght(float _value)
+    //{
+    //    for(int i = 0; i < myMat.Length;i++)
+    //    {
+    //        myMat[i].SetFloat("_Strenght", _value);
+    //    }
         
-    }
+    //}
 }

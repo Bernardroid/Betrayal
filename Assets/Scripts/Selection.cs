@@ -26,11 +26,11 @@ public class Selection : MonoBehaviour
                 {
                     if(Lastobject != null)
                     {
-                        Lastobject.GetComponent<Room>().ChangeStrenght(0.0f);
+                        //Lastobject.GetComponent<Room>().ChangeStrenght(0.0f);
                         Lastobject.GetComponent<Green>().deseleccionado();
                     }   
                     Lastobject = hit.transform;
-                    Lastobject.GetComponent<Room>().ChangeStrenght(0.5f);
+                    //Lastobject.GetComponent<Room>().ChangeStrenght(0.5f);
                     Lastobject.GetComponent<Green>().seleccionado();
                     Debug.Log("You selected the " + hit.transform.name);
                 }

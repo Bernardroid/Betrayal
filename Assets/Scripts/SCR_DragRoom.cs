@@ -21,7 +21,7 @@ public class SCR_DragRoom : MonoBehaviour {
         b_piecePermaLocked = false;
 
         renderer = GetComponent<Renderer>();
-        //startingColor = renderer.material.color;
+        startingColor = renderer.material.color;
         highlightColor = Color.yellow;
 
         hitInfo = new RaycastHit();
@@ -44,11 +44,11 @@ public class SCR_DragRoom : MonoBehaviour {
 
         if (b_piecePermaLocked)
         {
-            //renderer.material.color = Color.gray;
+            renderer.material.color = Color.gray;
         }
         else
         {
-            //renderer.material.color = highlightColor;
+            renderer.material.color = highlightColor;
         }
     }
 
@@ -59,11 +59,11 @@ public class SCR_DragRoom : MonoBehaviour {
 
         if (GetComponent<SCR_DragRoom>().b_piecePermaLocked)
         {
-            //renderer.material.color = Color.gray;
+            renderer.material.color = Color.gray;
         }
         else
         {
-            //renderer.material.color = startingColor;
+            renderer.material.color = startingColor;
         }
     }
 
@@ -82,10 +82,7 @@ public class SCR_DragRoom : MonoBehaviour {
         //    }
         //}
 
-        //if(Input.GetMouseButtonDown(1))
-        //{
-        //    transform.Rotate(new Vector3(0, 90, 0));
-        //}
+        
     }
 
     private void Update()
@@ -97,17 +94,23 @@ public class SCR_DragRoom : MonoBehaviour {
                 Debug.Log("floor hit!");
                 if (hitInfo.transform.CompareTag("Floor") && GetComponent<RoomStatus>().isSelected && !b_piecePermaLocked)
                 {
-                    transform.position = new Vector3(hitInfo.transform.position.x, 5.0f, hitInfo.transform.position.z);
+                    transform.position = new Vector3(hitInfo.transform.position.x, 7.4f, hitInfo.transform.position.z);
 
-                    //if (hitInfo.transform.GetComponent<Renderer>().material.color == Color.cyan)
-                    //{
-                    //    transform.position = new Vector3(hitInfo.transform.position.x, transform.position.y, hitInfo.transform.position.z);
-                    //}
+                    if (hitInfo.transform.GetComponent<Renderer>().material.color == Color.cyan)
+                    {
+                        transform.position = new Vector3(hitInfo.transform.position.x, transform.position.y, hitInfo.transform.position.z);
+                    }
                     //GetComponent<SCR_ShowUnitRange>().ShowRange();
                 }
             }
         }
-        //if(Input.GetMouseButtonUp(0) && GetComponent<RoomStatus>().isSelected)
+
+        if (Input.GetMouseButtonDown(1) && GetComponent<RoomStatus>().isSelected)
+        {
+            transform.Rotate(new Vector3(0, 0, 90));
+            GetComponent<RoomStatus>().openSpaces = RoomStatus.RotateBoolsClockwise(GetComponent<RoomStatus>().openSpaces);
+        }
+        //if (Input.GetMouseButtonUp(0) && GetComponent<RoomStatus>().isSelected)
         //{
         //    //GetComponent<SCR_ShowUnitRange>().ClearTiles();
         //    b_piecePermaLocked = true;

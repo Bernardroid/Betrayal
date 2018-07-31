@@ -13,8 +13,6 @@ public class SCR_SelectRoom : MonoBehaviour {
     void Start()
     {
         hitInfo = new RaycastHit();
-
-        rooms = GameObject.FindGameObjectsWithTag("Room");
     }
 
     void Update()
@@ -27,30 +25,32 @@ public class SCR_SelectRoom : MonoBehaviour {
                 if (hitInfo.transform.CompareTag("Room"))
                 {
                     Debug.Log("Room Selected!");
-                    //DeselectAllRooms();
-                    //hitInfo.transform.GetComponent<Renderer>().material.color = Color.blue;
+                    DeselectAllRooms();
+                    hitInfo.transform.GetComponent<Renderer>().material.color = Color.blue;
                     hitInfo.transform.GetComponent<RoomStatus>().isSelected = true;
                     roomSelected = hitInfo.transform.gameObject;
                 }
                 else
                 {
-                    //DeselectAllRooms();
+                    DeselectAllRooms();
                 }
             }
             //In case they click outside the board
             else
             {
-                //DeselectAllRooms();
+                DeselectAllRooms();
             }
         }
     }
 
     void DeselectAllRooms()
     {
+        rooms = GameObject.FindGameObjectsWithTag("Room");
+
         roomSelected = null;
         for (int i = 0; i < rooms.Length; i++)
         {
-            rooms[i].GetComponent<UnitStatus>().isSelected = false;
+            rooms[i].GetComponent<RoomStatus>().isSelected = false;
             if (rooms[i].GetComponent<SCR_DragRoom>().b_piecePermaLocked)
             {
                 rooms[i].GetComponent<Renderer>().material.color = Color.gray;
