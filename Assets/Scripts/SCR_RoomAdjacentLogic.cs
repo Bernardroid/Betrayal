@@ -70,13 +70,13 @@ public class SCR_RoomAdjacentLogic : MonoBehaviour
     
 
     //Checks position in array of tile underneath room
-    Vector2 CheckTileUnderneath()
+    public Vector2 CheckTileUnderneath()
     {
         Vector2 tileBelow = new Vector2();
         RaycastHit hitInfo = new RaycastHit();
-        Ray myRay = new Ray(transform.position, Vector3.down);
-        //Debug.Log("AM TRYIN TO CHECK");
+
         Debug.DrawRay(transform.position, Vector3.down, Color.red, 3.0f);
+
         //Cast ray beneath room to check which tile it's on
         if (Physics.Raycast(transform.position, Vector3.down, out hitInfo, 10.0f, floorMask))
         {
@@ -93,14 +93,27 @@ public class SCR_RoomAdjacentLogic : MonoBehaviour
     //Test
     private void Update()
     {
-        if (Input.GetKey(KeyCode.Return))
+
+        if(GetComponent<SCR_DragRoom>().b_piecePermaLocked)
         {
             CheckAdjacentTiles();
         }
-        if(Input.GetKeyUp(KeyCode.Return))
-        {
-            Board.ResetTilesColor();
-        }
+        //if (Input.GetKey(KeyCode.Return))
+        //{
+        //    CheckAdjacentTiles();
+        //}
+        //if(Input.GetKeyUp(KeyCode.Return))
+        //{
+        //    Board.ResetTilesColor();
+        //}
+    }
+
+    public void AddRoomToFloor()
+    {
+        //Add room using tilebelow to the first floor array
+        Vector2 tileBelow = CheckTileUnderneath();
+        FirstFloor.floor[(int)tileBelow.x, (int)tileBelow.y].status = GetComponent<RoomStatus>();
+        FirstFloor.floor[(int)tileBelow.x, (int)tileBelow.y].inUse = true;
     }
 
 }

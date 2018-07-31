@@ -18,6 +18,6 @@ public class SCR_UIManager : MonoBehaviour {
 
     public void OnCreateRoomClicked(int _numberOfDoors)
     {
-        GameObject tempRoom = Instantiate(rooms[_numberOfDoors]);
+        Instantiate(rooms[_numberOfDoors]);
     }
 }

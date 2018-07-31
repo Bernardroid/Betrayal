@@ -15,6 +15,7 @@ public class SCR_DragRoom : MonoBehaviour {
     bool b_dragLocked;
 
     public bool b_piecePermaLocked;
+    public bool b_firstPieceSet;
 
     private void Start()
     {
@@ -91,7 +92,6 @@ public class SCR_DragRoom : MonoBehaviour {
         {
             if (Physics.Raycast(Camera.main.ScreenPointToRay(Input.mousePosition), out hitInfo, floorMask))
             {
-                Debug.Log("floor hit!");
                 if (hitInfo.transform.CompareTag("Floor") && GetComponent<RoomStatus>().isSelected && !b_piecePermaLocked)
                 {
                     transform.position = new Vector3(hitInfo.transform.position.x, 7.4f, hitInfo.transform.position.z);
@@ -105,10 +105,27 @@ public class SCR_DragRoom : MonoBehaviour {
             }
         }
 
-        if (Input.GetMouseButtonDown(1) && GetComponent<RoomStatus>().isSelected)
+        if(Input.GetMouseButtonUp(0) && GetComponent<RoomStatus>().isSelected && !b_piecePermaLocked)
+        {
+            Vector2 tileBelow = GetComponent<SCR_RoomAdjacentLogic>().CheckTileUnderneath();
+            if (Board.Tiles[(int)tileBelow.x, (int)tileBelow.y].GetComponent<Renderer>().material.color == Color.green)
+            {
+                GetComponent<SCR_RoomAdjacentLogic>().AddRoomToFloor();
+                b_piecePermaLocked = true;
+            }
+        }
+
+        if (Input.GetMouseButtonDown(1) && GetComponent<RoomStatus>().isSelected && !b_piecePermaLocked)
         {
             transform.Rotate(new Vector3(0, 0, 90));
             GetComponent<RoomStatus>().openSpaces = RoomStatus.RotateBoolsClockwise(GetComponent<RoomStatus>().openSpaces);
+        }
+
+        if(Input.GetKeyDown(KeyCode.Return) && !b_firstPieceSet)
+        {
+            GetComponent<SCR_RoomAdjacentLogic>().AddRoomToFloor();
+            b_piecePermaLocked = true;
+            b_firstPieceSet = true;
         }
         //if (Input.GetMouseButtonUp(0) && GetComponent<RoomStatus>().isSelected)
         //{
